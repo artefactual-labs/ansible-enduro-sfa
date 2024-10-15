@@ -43,4 +43,8 @@ secretKey = "{{ pipeline.watched_secret }}"
 region = "{{ pipeline.watched_region }}"
 bucket = "ais"
 
+[fileformat]
+allowlistPath = "/etc/allowed_formats.csv"
+
+
 {% endif %}

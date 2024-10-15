@@ -21,4 +21,16 @@
     - templates/preprocessing-worker.toml.j2
   notify: restart preprocessing-worker
 
+- name: Copy the allowed formats config file
+  template:
+    src: "{{ item }}"
+    dest: /etc/allowed_formats.csv
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - templates/{{ inventory_hostname }}/allowed_formats.csv
+    - templates/allowed_formats.csv.j2
+  notify: restart preprocessing-worker
+
 
