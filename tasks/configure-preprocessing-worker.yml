@@ -9,6 +9,17 @@
     mode: 0755
     state: "directory"
 
+- name: Copy the allowed file formats CSV file
+  template:
+    src: "{{ item }}"
+    dest: /etc/allowed_file_formats.csv
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - templates/{{ inventory_hostname }}/allowed_file_formats.csv.j2
+    - templates/allowed_file_formats.csv.j2
+
 - name: Copy the preprocessing worker config file
   template:
     src: "{{ item }}"
@@ -20,5 +31,3 @@
     - templates/{{ inventory_hostname }}/preprocessing-worker.toml.j2
     - templates/preprocessing-worker.toml.j2
   notify: restart preprocessing-worker
-
-
