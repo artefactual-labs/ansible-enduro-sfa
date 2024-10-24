@@ -16,19 +16,21 @@ taskQueue = "global"
 listen = "{{ enduro_listen_api_address }}"
 debug = "{{ enduro_api_debug_enabled }}"
 
-
 [api.auth]
 enabled = "{{ enduro_auth_enabled }}"
 
 [api.auth.oidc]
 providerURL = "{{ enduro_auth_oidc_provider_url }}"
 clientID = "{{ enduro_auth_oidc_api_client_id }}"
+skipEmailVerifiedCheck = "{{ enduro_auth_oidc_skip_email_verified_check }}"
 
 [api.auth.oidc.abac]
 enabled = "{{ enduro_auth_oidc_abac_enabled }}"
 claimPath = "{{ enduro_auth_oidc_abac_claim_path }}"
 claimPathSeparator = "{{ enduro_auth_oidc_abac_claim_path_separator }}"
 claimValuePrefix = "{{ enduro_auth_oidc_abac_claim_value_prefix }}"
+useRoles = "{{ enduro_auth_oidc_abac_use_roles }}"
+rolesMapping = "{{ enduro_auth_oidc_abac_roles_mapping }}"
 
 [api.auth.ticket.redis]
 address = "redis://127.0.0.1:6379"
