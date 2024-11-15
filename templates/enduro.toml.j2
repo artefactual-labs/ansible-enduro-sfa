@@ -72,6 +72,10 @@ namespace = "default"
 taskQueue = "ais"
 workflowName = "ais"
 
+[validatePremis]
+enabled = true
+xsdPath = "/etc/premis.xsd"
+
 [storage]
 enduroAddress = "{{ enduro_storage_enduro_address }}"
 defaultPermanentLocationId = "{{ enduro_storage_location_uuid }}"
