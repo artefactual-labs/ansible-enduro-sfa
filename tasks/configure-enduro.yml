@@ -11,6 +11,17 @@
     - templates/enduro.service.j2
   notify: restart enduro
 
+- name: Copy the PREMIS XSD file
+  template:
+    src: "{{ item }}"
+    dest: /etc/premis.xsd
+    owner: root
+    group: root
+    mode: 0644
+  with_first_found:
+    - templates/{{ inventory_hostname }}/premis.xsd.j2
+    - templates/premis.xsd.j2
+
 - name: Copy the enduro config file
   template:
     src: "{{ item }}"
