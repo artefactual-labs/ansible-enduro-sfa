@@ -51,6 +51,14 @@ enduro_db_host: "localhost"
 enduro_db_name: "enduro"
 enduro_db_port: "3306"
 
+
+# Systemd credentials are disabled by default
+enduro_systemd_credentials: false
+
+# Configuration file defaults
+enduro_config_file: "templates/enduro.toml.j2"
+preprocessing_config_file: "templates/preprocessing-worker.toml.j2"
+
 # Enduro pipelines
 enduro_pipelines: []
 

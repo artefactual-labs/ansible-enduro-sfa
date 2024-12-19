@@ -8,7 +8,11 @@ Restart=on-failure
 User={{ enduro_system_user }}
 SyslogIdentifier=EnduroStdout
 SyslogFacility=local1
+{% if enduro_systemd_credentials|bool %}
+ExecStart={{ enduro_binary_install_dir }}/enduro --config $SECRETS
+{% else %}
 ExecStart={{ enduro_binary_install_dir }}/enduro --config /etc/enduro.toml
+{% endif %}
 
 [Install]
 WantedBy={{ enduro_systemd_wantedby_services }}
