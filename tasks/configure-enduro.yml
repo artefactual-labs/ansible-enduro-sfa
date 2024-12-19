@@ -1,14 +1,21 @@
 ---
 - name: Copy the enduro systemd service file
   template:
-    src: "{{ item }}"
+    src: templates/enduro.service.j2
     dest: /etc/systemd/system/enduro.service
     owner: root
     group: root
     mode: 0644
-  with_first_found:
-    - templates/{{ inventory_hostname }}/enduro.service.j2
-    - templates/enduro.service.j2
+  notify: restart enduro
+
+- name: Copy the enduro config file
+  template:
+    src: "{{ enduro_config_file }}"
+    dest: /etc/enduro.toml
+    owner: root
+    group: root
+    mode: 0644
+  when: not enduro_systemd_credentials|bool
   notify: restart enduro
 
 - name: Copy the PREMIS XSD file
@@ -21,18 +28,24 @@
   with_first_found:
     - templates/{{ inventory_hostname }}/premis.xsd.j2
     - templates/premis.xsd.j2
-
-- name: Copy the enduro config file
-  template:
-    src: "{{ item }}"
-    dest: /etc/enduro.toml
-    owner: root
-    group: root
-    mode: 0644
-  with_first_found:
-    - templates/{{ inventory_hostname }}/enduro.toml.j2
-    - templates/enduro.toml.j2
-  notify: restart enduro
+- name: Use systemd credentials
+  block:
+    - include_tasks: systemd-creds.yml
+      vars:
+        service: "enduro"
+        secret_name: "enduro.toml"
+        secret_file: "{{ enduro_config_file }}"
+    - include_tasks: systemd-creds.yml
+      vars:
+        service: "enduro-am-worker"
+        secret_name: "enduro.toml"
+        secret_file: "{{ enduro_config_file }}"
+  
+    - name: "Remove cleartext configuration file"
+      file:
+        path: "/etc/enduro.toml"
+        state: absent
+  when: enduro_systemd_credentials|bool
 
 - name: "Configure enduro_storage SS backend"
   mysql_query:
