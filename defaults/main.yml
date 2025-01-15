@@ -9,7 +9,7 @@ enduro_systemd_after_services: "network.target temporal.service"
 enduro_systemd_wantedby_services: "multi-user.target"
 enduro_temporal_namespace: "default" # By default only temporal-system namespace exists
 enduro_debug_verbosity: 2
-enduro_debug_enabled: "true"
+enduro_debug_enabled: "false"
 enduro_listen_temporal_address: "127.0.0.1:7233"
 enduro_api_debug_enabled: "false"
 enduro_create_pipeline_transfer_dir: "false"
