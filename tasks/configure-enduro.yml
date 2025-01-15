@@ -71,3 +71,13 @@
   when:
     - enduro_pipelines|length > 0
     - enduro_create_pipeline_transfer_dir|bool
+
+- name: Configure logging
+  block:
+    - include_tasks: configure-logging.yml
+      vars:
+        service: "enduro"
+        logfile: "/var/log/enduro/enduro.log"
+        order: "50"
+  when: enduro_use_syslog|bool
+

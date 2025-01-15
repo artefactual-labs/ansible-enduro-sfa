@@ -1,0 +1,13 @@
+if ($programname == "{{ service }}") then {
+        action(
+                type="omfile"
+                FileOwner="enduro"
+                FileGroup="enduro"
+                File="{{ logfile }}"
+                FileCreateMode="0644"
+        )
+	{% if enduro_remote_syslog != "none" %}
+	*.*      @@{{ enduro_remote_syslog }}
+        {% endif %}
+        stop
+}

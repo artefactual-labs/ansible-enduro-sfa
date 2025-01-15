@@ -14,6 +14,11 @@ ExecStart=/usr/bin/enduro-am-worker --config $SECRETS
 {% else %}
 ExecStart=/usr/bin/enduro-am-worker --config /etc/enduro.toml
 {% endif %}
+{% if enduro_use_syslog|bool %}
+SyslogIdentifier=enduro-am-worker
+StandardOutput=syslog
+StandardError=inherit
+{% endif %}
 
 # Let systemd restart this service always
 #Restart=always

@@ -10,3 +10,13 @@
     - templates/{{ inventory_hostname }}/enduro-am-worker.service.j2
     - templates/enduro-am-worker.service.j2
   notify: restart enduro-am-worker
+
+- name: Configure logging
+  block:
+    - include_tasks: configure-logging.yml
+      vars:
+        service: "enduro-am-worker"
+        logfile: "/var/log/enduro/enduro-am-worker.log"
+        order: "50"
+  when: enduro_use_syslog|bool
+
