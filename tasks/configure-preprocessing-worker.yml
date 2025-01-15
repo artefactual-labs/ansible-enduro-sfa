@@ -1,5 +1,3 @@
----
-
 - name: "Create preprocessing shared folder"
   become: yes
   file:
@@ -52,3 +50,14 @@
         path: "/etc/preprocessing-worker.toml"
         state: absent
   when: enduro_systemd_credentials|bool
+
+- name: Configure logging
+  block:
+    - include_tasks: configure-logging.yml
+      vars:
+        service: "preprocessing-worker"
+        logfile: "/var/log/enduro/preprocessing-worker.log"
+        order: "50"
+  when: enduro_use_syslog|bool
+
+  

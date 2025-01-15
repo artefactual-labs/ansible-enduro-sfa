@@ -66,6 +66,10 @@ enduro_systemd_credentials: false
 enduro_config_file: "templates/enduro.toml.j2"
 preprocessing_config_file: "templates/preprocessing-worker.toml.j2"
 
+# Logging configuration
+enduro_use_syslog: false
+enduro_remote_syslog: "none"
+
 # Enduro pipelines
 enduro_pipelines: []
 
