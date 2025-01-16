@@ -4,6 +4,12 @@
 debug = true
 verbosity = 2
 sharedPath = "/var/lib/enduro/preprocessing"
+checkDuplicates = "{{ preprocessing_check_duplicates }}"
+
+[persistence]
+dsn = "{{ preprocessing_db_user }}:{{ preprocessing_db_pass }}@tcp({{ preprocessing_db_host }}:{{ preprocessing_db_port | int }})/{{ preprocessing_db_name }}"
+driver = "mysql"
+migrate = true
 
 [temporal]
 address = "127.0.0.1:7233"
