@@ -51,6 +51,13 @@ enduro_db_host: "localhost"
 enduro_db_name: "enduro"
 enduro_db_port: "3306"
 
+# Preprocessing database
+preprocessing_db_user: "preprocessing"
+preprocessing_db_pass: "enduro%123"
+preprocessing_db_host: "localhost"
+preprocessing_db_name: "preprocessing"
+preprocessing_db_port: "3306"
+preprocessing_check_duplicates: "true"
 
 # Systemd credentials are disabled by default
 enduro_systemd_credentials: false
@@ -84,4 +91,3 @@ enduro_pipelines: []
 #    watched_retentionPeriod: "0s"
 #    watched_ignore: "(^.gitkeep)|(^*.mft)$"
 #    watched_rejectDuplicates: "false"
-
