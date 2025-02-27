@@ -1,4 +1,7 @@
 ---
+- name: "Escape role mappings for bash config"
+  shell: echo -n {{ enduro_auth_oidc_abac_roles_mapping }} |  jq -R -s .
+  register: __enduro_role_mappings
 
 - name: "Create config file"
   template:
