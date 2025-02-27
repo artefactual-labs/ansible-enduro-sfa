@@ -25,6 +25,11 @@
   when:
     - enduro_rpm_gpg_check_enabled|bool
 
+- name: Install jq package
+  yum:
+    name: "jq"
+    state: present
+
 - name: Install enduro package
   yum:
     name: "{{ enduro_rpm_url }}"
