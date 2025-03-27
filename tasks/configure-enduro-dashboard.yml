@@ -1,8 +1,4 @@
 ---
-- name: "Escape role mappings for bash config"
-  shell: echo -n {{ enduro_auth_oidc_abac_roles_mapping }} |  jq -R -s .
-  register: __enduro_role_mappings
-
 - name: "Create config file"
   template:
      src: "etc/sysconfig/enduro-dashboard.j2"
@@ -14,17 +10,18 @@
 - name: "Update enduro-dashboard source files"
   shell: |
     #!/usr/bin/env bash
-    TMP_DIR=/tmp/inject_vite_envs
-    ENDURO_DASHBOARD_ROOT=/usr/lib/enduro-dashboard
-    mkdir $TMP_DIR
+    ENDURO_DASHBOARD_SOURCE=/usr/lib/enduro-dashboard
+    ENDURO_DASHBOARD_DEST=/var/www/enduro-dashboard
+    rm -rf /var/www/enduro-dashboard
+    mkdir -p /var/www/
+    cp -rf ${ENDURO_DASHBOARD_SOURCE} ${ENDURO_DASHBOARD_DEST}
     source /etc/sysconfig/enduro-dashboard
     VITE_ENVS=$(printenv | awk -F= '$1 ~ /^VITE/ {print $1}' | sed 's/^/\$/g' | paste -sd,);
     echo "Vite envs: ${VITE_ENVS}"
-    for file in $ENDURO_DASHBOARD_ROOT/assets/*.js;
+    for file in $ENDURO_DASHBOARD_SOURCE/assets/*.js;
       do
-        echo "Inject VITE environment variables into $(basename $file)"
-        envsubst $VITE_ENVS < $file > $TMP_DIR/$(basename $file)
-        cp $TMP_DIR/$(basename $file) $file
+        echo "Inject VITE environment variables into $(basename $file) to  $ENDURO_DASHBOARD_DEST/assets/$(basename $file)"
+        envsubst $VITE_ENVS < $file > $ENDURO_DASHBOARD_DEST/assets/$(basename $file)
       done
-
- 
+      sed -i 's/_ROLES_MAPPING:"{/_ROLES_MAPPING:'\''{/g' /var/www/enduro-dashboard/assets/*.js
+      sed -i 's/:read"]}",/:read"]}'\'',/g' /var/www/enduro-dashboard/assets/*.js
