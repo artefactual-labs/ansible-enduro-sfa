@@ -14,6 +14,8 @@
     ENDURO_DASHBOARD_DEST=/var/www/enduro-dashboard
     rm -rf /var/www/enduro-dashboard
     mkdir -p /var/www/
+    # Change quotes for VITE_OIDC_ABAC_ROLES_MAPPING
+    sed -i 's/"$VITE_OIDC_ABAC_ROLES_MAPPING"/'\''$VITE_OIDC_ABAC_ROLES_MAPPING'\''/g' $ENDURO_DASHBOARD_SOURCE/assets/*.js
     cp -rf ${ENDURO_DASHBOARD_SOURCE} ${ENDURO_DASHBOARD_DEST}
     source /etc/sysconfig/enduro-dashboard
     VITE_ENVS=$(printenv | awk -F= '$1 ~ /^VITE/ {print $1}' | sed 's/^/\$/g' | paste -sd,);
@@ -23,5 +25,3 @@
         echo "Inject VITE environment variables into $(basename $file) to  $ENDURO_DASHBOARD_DEST/assets/$(basename $file)"
         envsubst $VITE_ENVS < $file > $ENDURO_DASHBOARD_DEST/assets/$(basename $file)
       done
-      sed -i 's/_ROLES_MAPPING:"{/_ROLES_MAPPING:'\''{/g' /var/www/enduro-dashboard/assets/*.js
-      sed -i 's/:read"]}",/:read"]}'\'',/g' /var/www/enduro-dashboard/assets/*.js
