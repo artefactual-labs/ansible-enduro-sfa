@@ -30,7 +30,9 @@ claimPath = "{{ enduro_auth_oidc_abac_claim_path }}"
 claimPathSeparator = "{{ enduro_auth_oidc_abac_claim_path_separator }}"
 claimValuePrefix = "{{ enduro_auth_oidc_abac_claim_value_prefix }}"
 useRoles = "{{ enduro_auth_oidc_abac_use_roles }}"
-rolesMapping = '{{ enduro_auth_oidc_abac_roles_mapping }}'
+rolesMapping = """
+ {{ enduro_auth_oidc_abac_roles_mapping | replace("'",'') }}
+"""
 
 [api.auth.ticket.redis]
 address = "redis://127.0.0.1:6379"
