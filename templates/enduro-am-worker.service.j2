@@ -6,9 +6,9 @@ AssertFileIsExecutable=/usr/bin/enduro-am-worker
 [Service]
 Type=simple
 WorkingDirectory=/var/lib/enduro
-User=enduro
-Group=enduro
-EnvironmentFile=-/etc/sysconfig/enduro-am-worker
+User={{ enduro_system_user }}
+Group={{ enduro_system_group }}
+EnvironmentFile=-{{ systemd_environment_path }}/enduro-am-worker
 {% if enduro_systemd_credentials|bool %}
 ExecStart=/usr/bin/enduro-am-worker --config $SECRETS
 {% else %}
