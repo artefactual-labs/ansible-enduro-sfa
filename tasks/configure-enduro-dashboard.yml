@@ -17,7 +17,12 @@
     # Change quotes for VITE_OIDC_ABAC_ROLES_MAPPING
     sed -i 's/"$VITE_OIDC_ABAC_ROLES_MAPPING"/'\''$VITE_OIDC_ABAC_ROLES_MAPPING'\''/g' $ENDURO_DASHBOARD_SOURCE/assets/*.js
     cp -rf ${ENDURO_DASHBOARD_SOURCE} ${ENDURO_DASHBOARD_DEST}
-    source /etc/sysconfig/enduro-dashboard
+    if [ -f /etc/sysconfig/enduro-dashboard ]
+    then
+     export $(cat /etc/sysconfig/enduro-dashboard)
+    else
+     export $(cat /etc/default/enduro-dashboard)
+    fi
     VITE_ENVS=$(printenv | awk -F= '$1 ~ /^VITE/ {print $1}' | sed 's/^/\$/g' | paste -sd,);
     echo "Vite envs: ${VITE_ENVS}"
     for file in $ENDURO_DASHBOARD_SOURCE/assets/*.js;
