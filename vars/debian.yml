@@ -1,1 +1,3 @@
 ---
+
+systemd_environment_path: "/etc/default/"
