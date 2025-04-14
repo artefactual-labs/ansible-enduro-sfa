@@ -14,6 +14,7 @@
     shell: /usr/sbin/nologin
     system: true
     createhome: true
+    generate_ssh_key: true  
     home: /var/lib/enduro
   when: enduro_create_system_user|bool
 
