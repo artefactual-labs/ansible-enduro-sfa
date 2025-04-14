@@ -83,6 +83,7 @@ enduro_systemd_credentials: false
 # Configuration file defaults
 enduro_config_file: "templates/enduro.toml.j2"
 preprocessing_config_file: "templates/preprocessing-worker.toml.j2"
+enduro_enable_poststorage: true
 
 # Logging configuration
 enduro_use_syslog: false
@@ -106,6 +107,8 @@ enduro_pipelines: []
 #    capacity: 3
 #    retryDeadline: "10m"
 #    transferDeadline: "24h"
+#    validatePremis: "false"
+#    preprocessingEnabled: "false"
 #    watched_name: "watched-pipeline1"
 #    watched_path: "/var/archivematica/watched"
 #    watched_inotify: "false"
