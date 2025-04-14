@@ -62,7 +62,7 @@ migrate = true
 {% for pipeline in enduro_pipelines %}
 
 [preprocessing]
-enabled = true
+enabled = "{{ pipeline.preprocessingEnabled|default('true')}}"
 extract = true
 sharedPath = "/var/lib/enduro/preprocessing"
 
@@ -77,7 +77,7 @@ taskQueue = "ais"
 workflowName = "ais"
 
 [validatePremis]
-enabled = true
+enabled = "{{ pipeline.validatePremis|default("true") }}"
 xsdPath = "/etc/premis.xsd"
 
 [storage]
