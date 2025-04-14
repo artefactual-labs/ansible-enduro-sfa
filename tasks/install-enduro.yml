@@ -69,3 +69,10 @@
   notify: restart enduro
   when: not ansible_check_mode
 
+- name: "Create enduro-am-worker config file"
+  template:
+     src: "etc/sysconfig/enduro-am-worker.j2"
+     dest: "{{ systemd_environment_path }}/enduro-am-worker"
+     mode: 0640
+     owner: "{{ enduro_system_user }}"
+     group: "{{ enduro_system_group }}"
