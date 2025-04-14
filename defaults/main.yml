@@ -159,6 +159,7 @@ enduro_pipelines: []
 #    capacity: 3
 #    retryDeadline: "10m"
 #    transferDeadline: "24h"
+#    validatePremis: "false"
 #    watched_name: "watched-pipeline1"
 #    watched_path: "/var/archivematica/watched"
 #    watched_inotify: "false"
