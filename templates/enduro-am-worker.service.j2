@@ -1,6 +1,7 @@
 [Unit]
 Description=Enduro AM worker
 AssertFileIsExecutable=/usr/bin/enduro-am-worker
+After={{ enduro_systemd_after_services }}
 
 
 [Service]
