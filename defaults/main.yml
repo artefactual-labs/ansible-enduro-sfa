@@ -57,7 +57,10 @@ preprocessing_db_pass: "enduro%123"
 preprocessing_db_host: "localhost"
 preprocessing_db_name: "preprocessing"
 preprocessing_db_port: "3306"
+
+# Other preprocessing settings
 preprocessing_check_duplicates: "true"
+preprocessing_verapdf_path: "/usr/local/verapdf/verapdf"
 
 # Systemd credentials are disabled by default
 enduro_systemd_credentials: false
