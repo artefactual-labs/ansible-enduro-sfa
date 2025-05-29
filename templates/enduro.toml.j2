@@ -112,13 +112,13 @@ bucket = "failed-sips"
 [upload]
 maxSize = {{ enduro_upload_max_size }}
 
-[upload.bucket]
+[internalBucket]
 endpoint = "{{ pipeline.watched_endpoint }}"
-pathStyle = "{{ pipeline.watched_pathStyle }}"
+pathStyle = true
 accessKey = "{{ pipeline.watched_key }}"
 secretKey = "{{ pipeline.watched_secret }}"
 region = "{{ pipeline.watched_region }}"
-bucket = "{{ pipeline.watched_bucket }}"
+bucket = "enduro-ingest"
 
 [watcher.embedded]
 name = "{{ pipeline.watched_name }}"
