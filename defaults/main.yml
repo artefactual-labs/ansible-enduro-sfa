@@ -62,6 +62,9 @@ preprocessing_db_port: "3306"
 preprocessing_check_duplicates: "true"
 preprocessing_verapdf_path: "/usr/local/verapdf/verapdf"
 
+# Other Enduro settings
+enduro_upload_max_size: 4294967296 # 4 GiB
+
 # Systemd credentials are disabled by default
 enduro_systemd_credentials: false
 

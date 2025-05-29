@@ -110,7 +110,7 @@ region = "{{ pipeline.watched_region }}"
 bucket = "failed-sips"
 
 [upload]
-maxSize = 102400000
+maxSize = {{ enduro_upload_max_size }}
 
 [upload.bucket]
 endpoint = "{{ pipeline.watched_endpoint }}"
