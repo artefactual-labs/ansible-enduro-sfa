@@ -21,7 +21,7 @@
 - name: Download enduro binary to local folder
   become: false
   get_url:
-    url: "https://github.com/scollazo/enduro/releases/download/v{{ enduro_version }}/enduro-sdps_{{ enduro_version }}_Linux-64bit.tar.gz"
+    url: "https://github.com/artefactual-sdps/enduro/releases/download/v{{ enduro_version }}/enduro-sdps_{{ enduro_version }}_Linux-64bit.tar.gz"
     dest: "/tmp/enduro-sdps_{{ enduro_version }}_Linux-64bit.tar.gz"
     checksum: "sha256:{{ enduro_checksum }}"
     mode: '0644'
