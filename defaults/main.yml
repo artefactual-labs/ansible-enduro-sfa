@@ -28,6 +28,18 @@ enduro_auth_oidc_abac_claim_path: ""
 enduro_auth_oidc_abac_claim_path_separator: ""
 enduro_auth_oidc_abac_claim_value_prefix: ""
 
+# Enduro internal storage (ingest)
+enduro_internal_storage_url: ""
+enduro_internal_storage_endpoint: ""
+enduro_internal_storage_pathStyle: ""
+enduro_internal_storage_key: ""
+enduro_internal_storage_secret: ""
+enduro_internal_storage_region: ""
+enduro_internal_storage_bucket: ""
+enduro_internal_storage_azure_account: ""
+enduro_internal_storage_azure_key: ""
+
+# Enduro
 enduro_install_rpm: False
 enduro_rpm_url: "https://packages.archivematica.org/1.15.x/rocky9-extras/enduro-0.41.1-1.el9.x86_64.rpm"
 enduro_rpm_gpg_check_enabled: True

@@ -48,6 +48,23 @@ redisChannel = "enduro-events"
 listen = "{{ enduro_internal_api_listen }}"
 debug = "{{enduro_internal_api_debug }}"
 
+[internalStorage.bucket]
+{% if enduro_internal_storage_url %}
+url = "{{enduro_internal_storage_url }}"
+{% endif %}
+endpoint = "{{enduro_internal_storage_endpoint }}"
+pathStyle = "{{enduro_internal_storage_pathStyle }}"
+accessKey = "{{enduro_internal_storage_key }}"
+secretKey = "{{enduro_internal_storage_secret }}"
+region = "{{enduro_internal_storage_region }}"
+bucket = "{{enduro_internal_storage_bucket }}"
+
+{% if enduro_internal_storage_azure_account and enduro_internal_storage_azure_key %}
+[internalStorage.azure]
+storageAccount = "{{enduro_internal_storage_azure_account }}"
+storageKey = "{{enduro_internal_storage_azure_key }}"
+{% endif %}
+
 [database]
 dsn = "{{ enduro_db_user }}:{{ enduro_db_pass }}@tcp({{ enduro_db_host }}:{{ enduro_db_port | int }})/{{ enduro_db_name }}"
 driver = "mysql"
@@ -95,14 +112,6 @@ bucket = "aips"
 
 [upload]
 maxSize = {{ enduro_upload_max_size }}
-
-[internalBucket]
-endpoint = "{{ pipeline.watched_endpoint }}"
-pathStyle = true
-accessKey = "{{ pipeline.watched_key }}"
-secretKey = "{{ pipeline.watched_secret }}"
-region = "{{ pipeline.watched_region }}"
-bucket = "enduro-ingest"
 
 [watcher.embedded]
 name = "{{ pipeline.watched_name }}"
