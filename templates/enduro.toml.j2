@@ -88,10 +88,12 @@ namespace = "default"
 taskQueue = "preprocessing"
 workflowName = "preprocessing"
 
+{% if enduro_enable_poststorage %}
 [[poststorage]]
 namespace = "default"
 taskQueue = "ais"
 workflowName = "ais"
+{% endif %}
 
 [validatePremis]
 enabled = "{{ pipeline.validatePremis|default("true") }}"
