@@ -42,7 +42,7 @@ prefix = "enduro-ticket"
 
 [event]
 redisAddress = "redis://127.0.0.1:6379"
-redisChannel = "enduro-events"
+redisChannel = "enduro-ingest-events"
 
 [internalapi]
 listen = "{{ enduro_internal_api_listen }}"
@@ -101,7 +101,6 @@ xsdPath = "/etc/premis.xsd"
 enduroAddress = "{{ enduro_storage_enduro_address }}"
 defaultPermanentLocationId = "{{ enduro_storage_location_uuid }}"
 
-
 [storage.internal]
 endpoint = "{{ pipeline.watched_endpoint }}"
 pathStyle = true
@@ -109,6 +108,10 @@ key = "{{ pipeline.watched_key }}"
 secret = "{{ pipeline.watched_secret }}"
 region = "{{ pipeline.watched_region }}"
 bucket = "aips"
+
+[storage.event]
+redisAddress = "redis://127.0.0.1:6379"
+redisChannel = "enduro-storage-events"
 
 [upload]
 maxSize = {{ enduro_upload_max_size }}
