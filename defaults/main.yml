@@ -113,3 +113,24 @@ enduro_pipelines: []
 #    watched_retentionPeriod: "0s"
 #    watched_ignore: "(^.gitkeep)|(^*.mft)$"
 #    watched_rejectDuplicates: "false"
+
+# Enduro SIP sources (for now only the first one will be used)
+enduro_sip_sources: []
+
+#enduro_sip_sources:
+#  - id: "e6ddb29a-66d1-480e-82eb-fcfef1c825c5"
+#    name: "MinIO SIP Source"
+#    endpoint: "http://minio.enduro-sdps:9000"
+#    path_style: "true"
+#    access_key: "minio"
+#    secret_key: "minio123"
+#    region: "us-west-1"
+#    bucket: "sip-source"
+#  - id: "f7eec30b-77e2-591f-93fc-gdgfg2d936d6"
+#    name: "AWS S3 SIP Source"
+#    endpoint: "https://s3.amazonaws.com"
+#    path_style: false
+#    access_key: "AKIAIOSFODNN7EXAMPLE"
+#    secret_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+#    region: "us-east-1"
+#    bucket: "my-sip-bucket"

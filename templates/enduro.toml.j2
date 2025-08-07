@@ -65,6 +65,20 @@ storageAccount = "{{enduro_internal_storage_azure_account }}"
 storageKey = "{{enduro_internal_storage_azure_key }}"
 {% endif %}
 
+{% if enduro_sip_sources %}
+{% set sip_source = enduro_sip_sources | first %}
+[sipsource]
+id = "{{ sip_source.id }}"
+name = "{{ sip_source.name }}"
+[sipsource.bucket]
+endpoint = "{{ sip_source.endpoint }}"
+pathStyle = {{ sip_source.path_style }}
+accessKey = "{{ sip_source.access_key }}"
+secretKey = "{{ sip_source.secret_key }}"
+region = "{{ sip_source.region }}"
+bucket = "{{ sip_source.bucket }}"
+{% endif %}
+
 [database]
 dsn = "{{ enduro_db_user }}:{{ enduro_db_pass }}@tcp({{ enduro_db_host }}:{{ enduro_db_port | int }})/{{ enduro_db_name }}"
 driver = "mysql"
