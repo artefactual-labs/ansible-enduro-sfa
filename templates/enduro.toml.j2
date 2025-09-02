@@ -79,6 +79,11 @@ region = "{{ sip_source.region }}"
 bucket = "{{ sip_source.bucket }}"
 {% endif %}
 
+[auditlog]
+filepath = "{{ enduro_auditlog_filepath }}"
+maxSize = 2147483647
+compress = false
+
 [database]
 dsn = "{{ enduro_db_user }}:{{ enduro_db_pass }}@tcp({{ enduro_db_host }}:{{ enduro_db_port | int }})/{{ enduro_db_name }}"
 driver = "mysql"

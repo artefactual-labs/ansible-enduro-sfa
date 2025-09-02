@@ -76,6 +76,7 @@ preprocessing_verapdf_path: "/usr/local/verapdf/verapdf"
 
 # Other Enduro settings
 enduro_upload_max_size: 4294967296 # 4 GiB
+enduro_auditlog_filepath: "/var/log/enduro/audit.log"
 
 # Systemd credentials are disabled by default
 enduro_systemd_credentials: false

@@ -77,7 +77,19 @@
     - include_tasks: configure-logging.yml
       vars:
         service: "enduro"
+        conf_files_name: "enduro"
         logfile: "/var/log/enduro/enduro.log"
         order: "50"
   when: enduro_use_syslog|bool
 
+- name: Configure audit logging
+  block:
+    - include_tasks: configure-logging.yml
+      vars:
+        service: "enduro"
+        conf_files_name: "enduro-audit"
+        logfile: "{{ enduro_auditlog_filepath }}"
+        order: "51"
+  when: 
+    - enduro_use_syslog|bool
+    - enduro_auditlog_filepath | length > 0
