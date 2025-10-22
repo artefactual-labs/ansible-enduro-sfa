@@ -76,6 +76,7 @@ preprocessing_verapdf_path: "/usr/local/verapdf/verapdf"
 
 # Other Enduro settings
 enduro_upload_max_size: 4294967296 # 4 GiB
+enduro_upload_retention_period: "0s"
 enduro_auditlog_filepath: "/var/log/enduro/audit.log"
 enduro_institution_logo: ""
 enduro_institution_name: ""
@@ -124,6 +125,7 @@ enduro_sip_sources: []
 #enduro_sip_sources:
 #  - id: "e6ddb29a-66d1-480e-82eb-fcfef1c825c5"
 #    name: "MinIO SIP Source"
+#    retention_period: "0s"
 #    endpoint: "http://minio.enduro-sdps:9000"
 #    path_style: "true"
 #    access_key: "minio"
@@ -132,6 +134,7 @@ enduro_sip_sources: []
 #    bucket: "sip-source"
 #  - id: "f7eec30b-77e2-591f-93fc-gdgfg2d936d6"
 #    name: "AWS S3 SIP Source"
+#    retention_period: "-1s"
 #    endpoint: "https://s3.amazonaws.com"
 #    path_style: false
 #    access_key: "AKIAIOSFODNN7EXAMPLE"

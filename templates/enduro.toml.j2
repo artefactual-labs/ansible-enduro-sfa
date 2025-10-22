@@ -70,6 +70,7 @@ storageKey = "{{enduro_internal_storage_azure_key }}"
 [sipsource]
 id = "{{ sip_source.id }}"
 name = "{{ sip_source.name }}"
+retentionPeriod = "{{ sip_source.retention_period }}"
 [sipsource.bucket]
 endpoint = "{{ sip_source.endpoint }}"
 pathStyle = {{ sip_source.path_style }}
@@ -134,6 +135,7 @@ redisChannel = "enduro-storage-events"
 
 [upload]
 maxSize = {{ enduro_upload_max_size }}
+retentionPeriod = "{{ enduro_upload_retention_period }}"
 
 [watcher.embedded]
 name = "{{ pipeline.watched_name }}"
@@ -146,7 +148,7 @@ secret = "{{ pipeline.watched_secret }}"
 region = "{{ pipeline.watched_region }}"
 bucket = "{{ pipeline.watched_bucket }}"
 pipeline = "{{ pipeline.name }}"
-## retentionPeriod = "{{ pipeline.watched_retentionPeriod }}"
+retentionPeriod = "{{ pipeline.watched_retentionPeriod }}"
 stripTopLevelDir = "{{ pipeline.watched_stripTopLevelDir }}"
 ##rejectDuplicates = "{{ pipeline.watched_rejectDuplicates | default('false') }}"
 
