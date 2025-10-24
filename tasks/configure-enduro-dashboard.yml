@@ -7,6 +7,15 @@
      owner: "{{ enduro_system_user }}"
      group: "{{ enduro_system_group }}"
 
+- name: "Copy custom content for Enduro dashboard"
+  copy:
+    src: "templates/enduro-dashboard/{{ inventory_hostname }}/custom/"
+    dest: "/usr/lib/enduro-dashboard/custom/"
+    owner: root
+    group: root
+    mode: 0755
+  when: enduro_custom_home_url is defined and enduro_custom_home_url | length > 0
+
 - name: "Update enduro-dashboard source files"
   shell: |
     #!/usr/bin/env bash
