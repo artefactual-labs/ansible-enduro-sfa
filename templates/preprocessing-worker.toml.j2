@@ -3,7 +3,7 @@
 
 debug = false
 verbosity = 2
-sharedPath = "/var/lib/enduro/preprocessing"
+sharedPath = "{{ enduro_shared_path|default('/var/lib/enduro/preprocessing') }}"
 checkDuplicates = "{{ preprocessing_check_duplicates }}"
 
 [persistence]
