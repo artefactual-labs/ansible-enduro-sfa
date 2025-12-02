@@ -9,7 +9,7 @@
 
 - name: "Copy custom content for Enduro dashboard"
   copy:
-    src: "templates/enduro-dashboard/{{ inventory_hostname }}/custom/"
+    src: "templates/{{ inventory_hostname }}/custom-dashboard/"
     dest: "/usr/lib/enduro-dashboard/custom/"
     owner: root
     group: root
