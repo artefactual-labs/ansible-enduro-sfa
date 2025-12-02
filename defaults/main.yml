@@ -83,6 +83,20 @@ enduro_institution_name: ""
 enduro_institution_url: ""
 enduro_custom_home_url: ""
 
+# enduro_storage_aip_deletion_approve_amss determines whether AIP deletions are
+# automatically approved in the Archivematica's Storage Service for AMSS locations.
+# When set to false (default), AIP deletions in AMSS locations require manual
+# approval in AMSS. When set to true, they are automatically approved by Enduro,
+# this requires AMSS v0.25.0 or later.
+enduro_storage_aip_deletion_approve_amss: "false"
+
+# enduro_storage_aip_deletion_report_template_path specifies the destination path
+# where the AIP deletion report template file will be copied. The task will look
+# for the template in templates/{{ inventory_hostname }}/aip_deletion_report.tmpl.pdf
+# or templates/aip_deletion_report.tmpl.pdf. If empty, the template file will not
+# be copied and AIP deletion reports will not be generated.
+enduro_storage_aip_deletion_report_template_path: ""
+
 # Systemd credentials are disabled by default
 enduro_systemd_credentials: false
 

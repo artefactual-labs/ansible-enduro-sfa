@@ -133,6 +133,10 @@ bucket = "aips"
 redisAddress = "redis://127.0.0.1:6379"
 redisChannel = "enduro-storage-events"
 
+[storage.aipDeletion]
+approveAMSS = {{ enduro_storage_aip_deletion_approve_amss }}
+reportTemplatePath = "{{ enduro_storage_aip_deletion_report_template_path }}"
+
 [upload]
 maxSize = {{ enduro_upload_max_size }}
 retentionPeriod = "{{ enduro_upload_retention_period }}"
