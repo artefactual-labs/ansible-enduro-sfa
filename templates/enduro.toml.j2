@@ -122,12 +122,15 @@ enduroAddress = "{{ enduro_storage_enduro_address }}"
 defaultPermanentLocationId = "{{ enduro_storage_location_uuid }}"
 
 [storage.internal]
-endpoint = "{{ pipeline.watched_endpoint }}"
-pathStyle = true
-key = "{{ pipeline.watched_key }}"
-secret = "{{ pipeline.watched_secret }}"
-region = "{{ pipeline.watched_region }}"
-bucket = "aips"
+{% if enduro_storage_internal_storage_url %}
+url = "{{enduro_storage_internal_storage_url }}"
+{% endif %}
+endpoint = "{{enduro_storage_internal_storage_endpoint }}"
+pathStyle = "{{enduro_storage_internal_storage_pathStyle }}"
+key = "{{enduro_storage_internal_storage_key }}"
+secret = "{{enduro_storage_internal_storage_secret }}"
+region = "{{enduro_storage_internal_storage_region }}"
+bucket = "{{enduro_storage_internal_storage_bucket }}"
 
 [storage.event]
 redisAddress = "redis://127.0.0.1:6379"
