@@ -107,3 +107,12 @@
   when: 
     - enduro_use_syslog|bool
     - enduro_auditlog_filepath | length > 0
+
+- name: "Create .config directory (needed by pdfcpu)"
+  become: yes
+  file:
+    path: "/var/lib/enduro/.config"
+    owner: "{{ enduro_system_user }}"
+    group: "{{ enduro_system_group }}"
+    mode: 0755
+    state: "directory"
