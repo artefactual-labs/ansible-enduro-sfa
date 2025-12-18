@@ -79,6 +79,10 @@
     name: "{{ item }}"
     enabled: true
     state: "restarted"
+  register: enduroBoot
+  until: enduroBoot.status.ActiveState == "active"
+  retries: 15
+  delay: 20
   with_items:
     - enduro
   tags:
