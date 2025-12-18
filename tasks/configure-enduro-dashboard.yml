@@ -1,5 +1,6 @@
 ---
-- name: "Create config file"
+- name: "dashbord: Create config file"
+  become: true
   template:
      src: "etc/sysconfig/enduro-dashboard.j2"
      dest: "{{ systemd_environment_path }}/enduro-dashboard"
