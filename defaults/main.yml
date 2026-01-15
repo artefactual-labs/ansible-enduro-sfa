@@ -111,6 +111,7 @@ enduro_systemd_credentials: false
 
 # Configuration file defaults
 enduro_config_file: "templates/enduro.toml.j2"
+enduro_shared_path: "/var/lib/enduro/preprocessing"
 preprocessing_config_file: "templates/preprocessing-worker.toml.j2"
 
 # Logging configuration

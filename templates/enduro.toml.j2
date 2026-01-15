@@ -101,7 +101,7 @@ migrate = true
 [preprocessing]
 enabled = true
 extract = true
-sharedPath = "/var/lib/enduro/preprocessing"
+sharedPath = "{{ enduro_shared_path|default('/var/lib/enduro/preprocessing') }}"
 
 [preprocessing.temporal]
 namespace = "default"

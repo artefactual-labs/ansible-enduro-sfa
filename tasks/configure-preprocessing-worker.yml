@@ -1,7 +1,7 @@
 - name: "Create preprocessing shared folder"
   become: yes
   file:
-    path: "/var/lib/enduro/preprocessing"
+    path: "{{ enduro_shared_path|default('/var/lib/enduro/preprocessing') }}"k
     owner: "{{ enduro_system_user }}"
     group: "{{ enduro_system_group }}"
     mode: 0755
