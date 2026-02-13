@@ -95,25 +95,26 @@ dsn = "{{ enduro_storage_db_user }}:{{ enduro_storage_db_pass }}@tcp({{ enduro_
 driver = "mysql"
 migrate = true
 
+{% if enduro_child_workflows|length > 0 %}
+{% for child_workflow in enduro_child_workflows %}
+
+[[childWorkflows]]
+type = "{{ child_workflow.type }}"
+namespace = "{{ child_workflow.namespace }}"
+taskQueue = "{{ child_workflow.taskQueue }}"
+workflowName = "{{ child_workflow.workflowName }}"
+{% if child_workflow.extract is defined %}
+extract = "{{ child_workflow.extract }}"
+{% endif %}
+{% if child_workflow.sharedPath is defined %}
+sharedPath = "{{ child_workflow.sharedPath }}"
+{% endif %}
+
+{% endfor %}
+{% endif %}
+
 {% if enduro_pipelines|length > 0 %}
 {% for pipeline in enduro_pipelines %}
-
-[preprocessing]
-enabled = "{{ pipeline.preprocessingEnabled|default('true')}}"
-extract = true
-sharedPath = "/var/lib/enduro/preprocessing"
-
-[preprocessing.temporal]
-namespace = "default"
-taskQueue = "preprocessing"
-workflowName = "preprocessing"
-
-{% if enduro_enable_poststorage %}
-[[poststorage]]
-namespace = "default"
-taskQueue = "ais"
-workflowName = "ais"
-{% endif %}
 
 [validatePremis]
 enabled = "{{ pipeline.validatePremis|default("true") }}"
