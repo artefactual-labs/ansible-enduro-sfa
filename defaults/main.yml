@@ -165,3 +165,20 @@ enduro_sip_sources: []
 #    secret_key: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 #    region: "us-east-1"
 #    bucket: "my-sip-bucket"
+
+enduro_child_workflows: []
+#enduro_child_workflows:
+#  - type: "preprocessing"
+#    namespace: "default"
+#    taskQueue: "preprocessing"
+#    workflowName: "preprocessing"
+#    extract: "true"
+#    sharedPath: "/var/lib/enduro/preprocessing"
+#  - type: "poststorage"
+#    namespace: "default"
+#    taskQueue: "poststorage"
+#    workflowName: "poststorage"
+#  - type: "postbatch"
+#    namespace: "default"
+#    taskQueue: "postbatch"
+#    workflowName: "postbatch"
