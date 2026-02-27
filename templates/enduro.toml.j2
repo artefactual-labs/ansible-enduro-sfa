@@ -17,23 +17,29 @@ listen = "{{ enduro_listen_api_address }}"
 debug = "{{ enduro_api_debug_enabled }}"
 
 [api.auth]
-enabled = "{{ enduro_auth_enabled }}"
+enabled = "{{ enduro_api_auth_enabled }}"
 
-[api.auth.oidc]
-providerURL = "{{ enduro_auth_oidc_provider_url }}"
-clientID = "{{ enduro_auth_oidc_api_client_id }}"
-skipEmailVerifiedCheck = "{{ enduro_auth_oidc_skip_email_verified_check }}"
+{% if enduro_api_auth_oidc|length > 0 %}
+{% for api_auth_oidc in enduro_api_auth_oidc %}
+
+[[api.auth.oidc]]
+providerURL = "{{ api_auth_oidc.provider_url }}"
+clientID = "{{ api_auth_oidc.client_id }}"
+skipEmailVerifiedCheck = "{{ api_auth_oidc.skip_email_verified_check }}"
 
 [api.auth.oidc.abac]
-enabled = "{{ enduro_auth_oidc_abac_enabled }}"
-claimPath = "{{ enduro_auth_oidc_abac_claim_path }}"
-claimPathSeparator = "{{ enduro_auth_oidc_abac_claim_path_separator }}"
-claimValuePrefix = "{{ enduro_auth_oidc_abac_claim_value_prefix }}"
-useRoles = "{{ enduro_auth_oidc_abac_use_roles }}"
-{% if enduro_auth_oidc_abac_use_roles|bool %}
+enabled = "{{ api_auth_oidc.abac_enabled }}"
+claimPath = "{{ api_auth_oidc.abac_claim_path }}"
+claimPathSeparator = "{{ api_auth_oidc.abac_claim_path_separator }}"
+claimValuePrefix = "{{ api_auth_oidc.abac_claim_value_prefix }}"
+useRoles = "{{ api_auth_oidc.abac_use_roles }}"
+{% if api_auth_oidc.abac_use_roles|bool %}
 rolesMapping = """
- {{ enduro_auth_oidc_abac_roles_mapping | replace("'",'') }}
+ {{ api_auth_oidc.abac_roles_mapping | replace("'",'') }}
 """
+{% endif %}
+
+{% endfor %}
 {% endif %}
 
 [api.auth.ticket.redis]

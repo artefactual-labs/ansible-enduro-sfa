@@ -15,18 +15,42 @@ enduro_api_debug_enabled: "false"
 enduro_create_pipeline_transfer_dir: "false"
 enduro_create_system_user: "true"
 
-# Enduro API/Dashboard auth
-enduro_auth_enabled: "false"
-enduro_auth_oidc_base_url: ""
-enduro_auth_oidc_provider_url: ""
-enduro_auth_oidc_api_client_id: ""
-enduro_auth_oidc_dashboard_client_id: ""
-enduro_auth_oidc_extra_scopes: ""
-enduro_auth_oidc_extra_query_params: ""
-enduro_auth_oidc_abac_enabled: "false"
-enduro_auth_oidc_abac_claim_path: ""
-enduro_auth_oidc_abac_claim_path_separator: ""
-enduro_auth_oidc_abac_claim_value_prefix: ""
+# Enduro API auth
+enduro_api_auth_enabled: "false"
+enduro_api_auth_oidc: []
+#enduro_api_auth_oidc:
+#  - provider_url: "http://keycloak:7470/realms/artefactual"
+#    client_id: "enduro"
+#    skip_email_verified_check: "false"
+#    abac_enabled: "true"
+#    abac_claim_path: "enduro"
+#    abac_claim_path_separator: ""
+#    abac_claim_value_prefix: ""
+#    abac_use_roles: "true"
+#    abac_roles_mapping: '{"admin": ["*"], "operator": ["ingest:sips:list", "ingest:sips:read", "ingest:sips:upload", "ingest:sips:workflows:list"]}'
+#  - provider_url: "http://keycloak:7470/realms/artefactual"
+#    client_id: "enduro-s2s"
+#    skip_email_verified_check: "true"
+#    abac_enabled: "false"
+#    abac_claim_path: ""
+#    abac_claim_path_separator: ""
+#    abac_claim_value_prefix: ""
+#    abac_use_roles: "false"
+#    abac_roles_mapping: ''
+
+# Enduro dashboard OIDC
+enduro_dashboard_oidc_enabled: "false"
+enduro_dashboard_oidc_base_url: ""
+enduro_dashboard_oidc_authority: ""
+enduro_dashboard_oidc_client_id: ""
+enduro_dashboard_oidc_scopes: ""
+enduro_dashboard_oidc_extra_query_params: ""
+enduro_dashboard_oidc_abac_enabled: "false"
+enduro_dashboard_oidc_abac_claim_path: ""
+enduro_dashboard_oidc_abac_claim_path_separator: ""
+enduro_dashboard_oidc_abac_claim_value_prefix: ""
+enduro_dashboard_oidc_abac_use_roles: "false"
+enduro_dashboard_oidc_abac_roles_mapping: ""
 
 # Enduro internal storage (ingest)
 enduro_internal_storage_url: ""
