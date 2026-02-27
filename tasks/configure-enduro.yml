@@ -69,7 +69,7 @@
     query: INSERT IGNORE INTO enduro_storage.location (name, description, source, purpose, uuid, created_at, config) VALUES ('amss', '', 'amss', 'aip_store', %(location_uuid)s, NOW(), %(ss_config)s )
     named_args:
       ss_config: "{{ enduro_storage_config | to_json }}"
-      location_uuid: "{{ enduro_storage_location_uuid }}"
+      location_uuid: "{{ enduro_ingest_storage_default_permanent_location_id }}"
   when:
     - "enduro_storage_config is defined"
 

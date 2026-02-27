@@ -206,3 +206,19 @@ enduro_child_workflows: []
 #    namespace: "default"
 #    taskQueue: "postbatch"
 #    workflowName: "postbatch"
+
+# Enduro ingest storage client configuration
+enduro_ingest_storage_address: ""
+enduro_ingest_storage_default_permanent_location_id: ""
+enduro_ingest_storage_oidc_enabled: "false"
+enduro_ingest_storage_oidc_provider_url: ""
+enduro_ingest_storage_oidc_token_url: ""
+enduro_ingest_storage_oidc_client_id: ""
+enduro_ingest_storage_oidc_client_secret: ""
+enduro_ingest_storage_oidc_scopes: ""
+enduro_ingest_storage_oidc_audience: ""
+enduro_ingest_storage_oidc_token_expiry_leeway: "30s"
+enduro_ingest_storage_oidc_retry_max_attempts: 3
+enduro_ingest_storage_oidc_retry_initial_interval: "500ms"
+enduro_ingest_storage_oidc_retry_max_interval: "2s"
+enduro_ingest_storage_oidc_retry_backoff_coefficient: 2.0

@@ -126,9 +126,26 @@ sharedPath = "{{ child_workflow.sharedPath }}"
 enabled = true
 xsdPath = "/etc/premis.xsd"
 
+[ingest.storage]
+address = "{{ enduro_ingest_storage_address }}"
+defaultPermanentLocationId = "{{ enduro_ingest_storage_default_permanent_location_id }}"
+
+[ingest.storage.oidc]
+enabled = {{ enduro_ingest_storage_oidc_enabled | default('false', true) }}
+providerURL = "{{ enduro_ingest_storage_oidc_provider_url }}"
+tokenURL = "{{ enduro_ingest_storage_oidc_token_url }}"
+clientID = "{{ enduro_ingest_storage_oidc_client_id }}"
+clientSecret = "{{ enduro_ingest_storage_oidc_client_secret }}"
+scopes = "{{ enduro_ingest_storage_oidc_scopes }}"
+audience = "{{ enduro_ingest_storage_oidc_audience }}"
+tokenExpiryLeeway = "{{ enduro_ingest_storage_oidc_token_expiry_leeway | default('30s', true) }}"
+retryMaxAttempts = {{ enduro_ingest_storage_oidc_retry_max_attempts | default(3, true) }}
+retryInitialInterval = "{{ enduro_ingest_storage_oidc_retry_initial_interval| default('500ms', true)  }}"
+retryMaxInterval = "{{ enduro_ingest_storage_oidc_retry_max_interval | default('2s', true) }}"
+retryBackoffCoefficient = {{ enduro_ingest_storage_oidc_retry_backoff_coefficient | default(2.0, true) }}
+
 [storage]
-enduroAddress = "{{ enduro_storage_enduro_address }}"
-defaultPermanentLocationId = "{{ enduro_storage_location_uuid }}"
+taskQueue = "global"
 
 [storage.internal]
 {% if enduro_storage_internal_storage_url %}
