@@ -54,4 +54,25 @@ secretKey = "{{ pipeline.watched_secret }}"
 region = "{{ pipeline.watched_region }}"
 bucket = "ais"
 
+[apis]
+enabled = "{{ sfa_apis_enabled | default('false', true) }}"
+url = "{{ sfa_apis_url }}"
+timeout = "{{ sfa_apis_timeout | default('10s', true) }}"
+pollInterval = "{{ sfa_apis_poll_interval | default('30s', true) }}"
+token = "{{ sfa_apis_token }}"
+
+[apis.oidc]
+enabled = "{{ sfa_apis_oidc_enabled | default('false', true) }}"
+providerURL = "{{ sfa_apis_oidc_provider_url }}"
+tokenURL = "{{ sfa_apis_oidc_token_url }}"
+clientID = "{{ sfa_apis_oidc_client_id }}"
+clientSecret = "{{ sfa_apis_oidc_client_secret }}"
+scopes = "{{ sfa_apis_oidc_scopes }}"
+audience = "{{ sfa_apis_oidc_audience }}"
+tokenExpiryLeeway = "{{ sfa_apis_oidc_token_expiry_leeway | default('30s', true) }}"
+retryMaxAttempts = {{ sfa_apis_oidc_retry_max_attempts | default(3, true) }}
+retryInitialInterval = "{{ sfa_apis_oidc_retry_initial_interval | default('500ms', true) }}"
+retryMaxInterval = "{{ sfa_apis_oidc_retry_max_interval | default('2s', true) }}"
+retryBackoffCoefficient = {{ sfa_apis_oidc_retry_backoff_coefficient | default(2.0, true) }}
+
 {% endif %}

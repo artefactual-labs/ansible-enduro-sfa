@@ -222,3 +222,22 @@ enduro_ingest_storage_oidc_retry_max_attempts: 3
 enduro_ingest_storage_oidc_retry_initial_interval: "500ms"
 enduro_ingest_storage_oidc_retry_max_interval: "2s"
 enduro_ingest_storage_oidc_retry_backoff_coefficient: 2.0
+
+# SFA APIS configuration
+sfa_apis_enabled: "false"
+sfa_apis_url: ""
+sfa_apis_timeout: "10s"
+sfa_apis_poll_interval: "30s"
+sfa_apis_token: ""
+sfa_apis_oidc_enabled: "false"
+sfa_apis_oidc_provider_url: ""
+sfa_apis_oidc_token_url: ""
+sfa_apis_oidc_client_id: ""
+sfa_apis_oidc_client_secret: ""
+sfa_apis_oidc_scopes: ""
+sfa_apis_oidc_audience: ""
+sfa_apis_oidc_token_expiry_leeway: "30s"
+sfa_apis_oidc_retry_max_attempts: 3
+sfa_apis_oidc_retry_initial_interval: "500ms"
+sfa_apis_oidc_retry_max_interval: "2s"
+sfa_apis_oidc_retry_backoff_coefficient: 2.0
