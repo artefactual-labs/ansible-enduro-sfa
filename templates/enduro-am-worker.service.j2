@@ -1,14 +1,15 @@
 [Unit]
 Description=Enduro AM worker
 AssertFileIsExecutable=/usr/bin/enduro-am-worker
+After={{ enduro_systemd_after_services }}
 
 
 [Service]
 Type=simple
 WorkingDirectory=/var/lib/enduro
-User=enduro
-Group=enduro
-EnvironmentFile=-/etc/sysconfig/enduro-am-worker
+User={{ enduro_system_user }}
+Group={{ enduro_system_group }}
+EnvironmentFile=-{{ systemd_environment_path }}/enduro-am-worker
 {% if enduro_systemd_credentials|bool %}
 ExecStart=/usr/bin/enduro-am-worker --config $SECRETS
 {% else %}
@@ -21,7 +22,8 @@ StandardError=inherit
 {% endif %}
 
 # Let systemd restart this service always
-#Restart=always
+Restart=always
+RestartSec=30
 
 # Specifies the maximum file descriptor number that can be opened by this process
 LimitNOFILE=1048576

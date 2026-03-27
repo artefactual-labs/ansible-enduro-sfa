@@ -14,6 +14,8 @@ enduro_listen_temporal_address: "127.0.0.1:7233"
 enduro_api_debug_enabled: "false"
 enduro_create_pipeline_transfer_dir: "false"
 enduro_create_system_user: "true"
+systemd_environment_path: "{% if ansible_os_family == 'RedHat' %}/etc/sysconfig{% else %}/etc/default{% endif %}"
+
 
 # Enduro API auth
 enduro_api_auth_enabled: "false"
@@ -159,6 +161,7 @@ enduro_pipelines: []
 #    capacity: 3
 #    retryDeadline: "10m"
 #    transferDeadline: "24h"
+#    validatePremis: "false"
 #    watched_name: "watched-pipeline1"
 #    watched_path: "/var/archivematica/watched"
 #    watched_inotify: "false"

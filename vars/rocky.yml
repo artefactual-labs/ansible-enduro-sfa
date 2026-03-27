@@ -1,1 +1,2 @@
 ---
+systemd_environment_path: "/etc/sysconfig/"

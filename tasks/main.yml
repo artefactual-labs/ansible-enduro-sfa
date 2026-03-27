@@ -79,6 +79,10 @@
     name: "{{ item }}"
     enabled: true
     state: "restarted"
+  register: enduroBoot
+  until: enduroBoot.status.ActiveState == "active"
+  retries: 15
+  delay: 20
   with_items:
     - enduro
   tags:
@@ -109,3 +113,15 @@
   when: preprocessing_worker_configure|bool
   tags:
     - preprocessing_worker_configure
+
+- name: "Configure enduro_storage SS backend"
+  mysql_query:
+    login_db: "{{ enduro_storage_db_name }}"
+    login_user: "{{ enduro_storage_db_user }}"
+    login_password: "{{ enduro_storage_db_pass }}"
+    query: INSERT IGNORE INTO enduro_storage.location (name, description, source, purpose, uuid, created_at, config) VALUES ('amss', '', 'amss', 'aip_store', %(location_uuid)s, NOW(), %(ss_config)s )
+    named_args:
+      ss_config: "{{ enduro_storage_config | to_json }}"
+      location_uuid: "{{ enduro_ingest_storage_default_permanent_location_id }}"
+  when:
+    - "enduro_storage_config is defined"
