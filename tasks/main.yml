@@ -15,9 +15,7 @@
     - "{{ ansible_distribution | lower }}.yml"
     - "{{ ansible_os_family | lower }}.yml"
   tags:
-    - enduro_install
-    - enduro_configure
-    - enduro_run
+    - always
 
 - import_tasks: preflight-enduro.yml
   when: not enduro_install_rpm|bool
