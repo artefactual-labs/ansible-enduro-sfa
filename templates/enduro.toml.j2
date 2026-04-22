@@ -54,22 +54,21 @@ redisChannel = "enduro-ingest-events"
 listen = "{{ enduro_internal_api_listen }}"
 debug = "{{enduro_internal_api_debug }}"
 
-[internalStorage.bucket]
-{% if enduro_internal_storage_url %}
-url = "{{enduro_internal_storage_url }}"
-{% endif %}
-endpoint = "{{enduro_internal_storage_endpoint }}"
-pathStyle = "{{enduro_internal_storage_pathStyle }}"
-accessKey = "{{enduro_internal_storage_key }}"
-secretKey = "{{enduro_internal_storage_secret }}"
-region = "{{enduro_internal_storage_region }}"
-bucket = "{{enduro_internal_storage_bucket }}"
+[internalStorage]
+url = "{{ enduro_internal_storage_url }}"
+endpoint = "{{ enduro_internal_storage_endpoint }}"
+pathStyle = "{{ enduro_internal_storage_pathStyle }}"
+accessKey = "{{ enduro_internal_storage_key }}"
+secretKey = "{{ enduro_internal_storage_secret }}"
+region = "{{ enduro_internal_storage_region }}"
+bucket = "{{ enduro_internal_storage_bucket }}"
 
-{% if enduro_internal_storage_azure_account and enduro_internal_storage_azure_key %}
 [internalStorage.azure]
-storageAccount = "{{enduro_internal_storage_azure_account }}"
-storageKey = "{{enduro_internal_storage_azure_key }}"
-{% endif %}
+storageAccount = "{{ enduro_internal_storage_azure_account }}"
+storageKey = "{{ enduro_internal_storage_azure_key }}"
+tenantID = "{{ enduro_internal_storage_azure_tenant_id }}"
+clientID = "{{ enduro_internal_storage_azure_client_id }}"
+clientSecret = "{{ enduro_internal_storage_azure_client_secret }}"
 
 {% if enduro_sip_sources %}
 {% set sip_source = enduro_sip_sources | first %}
@@ -78,12 +77,19 @@ id = "{{ sip_source.id }}"
 name = "{{ sip_source.name }}"
 retentionPeriod = "{{ sip_source.retention_period }}"
 [sipsource.bucket]
-endpoint = "{{ sip_source.endpoint }}"
-pathStyle = {{ sip_source.path_style }}
-accessKey = "{{ sip_source.access_key }}"
-secretKey = "{{ sip_source.secret_key }}"
-region = "{{ sip_source.region }}"
-bucket = "{{ sip_source.bucket }}"
+url = "{{ sip_source.url | default('') }}"
+endpoint = "{{ sip_source.endpoint | default('') }}"
+pathStyle = {{ sip_source.path_style | default('') }}
+accessKey = "{{ sip_source.access_key | default('') }}"
+secretKey = "{{ sip_source.secret_key | default('') }}"
+region = "{{ sip_source.region | default('') }}"
+bucket = "{{ sip_source.bucket | default('') }}"
+[sipsource.bucket.azure]
+storageAccount = "{{ sip_source.azure_account | default('') }}"
+storageKey = "{{ sip_source.azure_key | default('') }}"
+tenantID = "{{ sip_source.azure_tenant_id | default('') }}"
+clientID = "{{ sip_source.azure_client_id | default('') }}"
+clientSecret = "{{ sip_source.azure_client_secret | default('') }}"
 {% endif %}
 
 [auditlog]
@@ -148,15 +154,20 @@ retryBackoffCoefficient = {{ enduro_ingest_storage_oidc_retry_backoff_coefficien
 taskQueue = "global"
 
 [storage.internal]
-{% if enduro_storage_internal_storage_url %}
 url = "{{enduro_storage_internal_storage_url }}"
-{% endif %}
 endpoint = "{{enduro_storage_internal_storage_endpoint }}"
 pathStyle = "{{enduro_storage_internal_storage_pathStyle }}"
-key = "{{enduro_storage_internal_storage_key }}"
-secret = "{{enduro_storage_internal_storage_secret }}"
+accessKey = "{{enduro_storage_internal_storage_key }}"
+secretKey = "{{enduro_storage_internal_storage_secret }}"
 region = "{{enduro_storage_internal_storage_region }}"
 bucket = "{{enduro_storage_internal_storage_bucket }}"
+
+[storage.internal.azure]
+storageAccount = "{{ enduro_storage_internal_storage_azure_account }}"
+storageKey = "{{ enduro_storage_internal_storage_azure_key }}"
+tenantID = "{{ enduro_storage_internal_storage_azure_tenant_id }}"
+clientID = "{{ enduro_storage_internal_storage_azure_client_id }}"
+clientSecret = "{{ enduro_storage_internal_storage_azure_client_secret }}"
 
 [storage.event]
 redisAddress = "redis://127.0.0.1:6379"
