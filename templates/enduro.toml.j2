@@ -25,15 +25,15 @@ enabled = "{{ enduro_api_auth_enabled }}"
 [[api.auth.oidc]]
 providerURL = "{{ api_auth_oidc.provider_url }}"
 clientID = "{{ api_auth_oidc.client_id }}"
-skipEmailVerifiedCheck = "{{ api_auth_oidc.skip_email_verified_check }}"
+skipEmailVerifiedCheck = "{{ api_auth_oidc.skip_email_verified_check | default('false', true) }}"
 
 [api.auth.oidc.abac]
-enabled = "{{ api_auth_oidc.abac_enabled }}"
-claimPath = "{{ api_auth_oidc.abac_claim_path }}"
-claimPathSeparator = "{{ api_auth_oidc.abac_claim_path_separator }}"
-claimValuePrefix = "{{ api_auth_oidc.abac_claim_value_prefix }}"
-useRoles = "{{ api_auth_oidc.abac_use_roles }}"
-{% if api_auth_oidc.abac_use_roles|bool %}
+enabled = "{{ api_auth_oidc.abac_enabled | default('false', true) }}"
+claimPath = "{{ api_auth_oidc.abac_claim_path | default('') }}"
+claimPathSeparator = "{{ api_auth_oidc.abac_claim_path_separator | default('') }}"
+claimValuePrefix = "{{ api_auth_oidc.abac_claim_value_prefix | default('') }}"
+useRoles = "{{ api_auth_oidc.abac_use_roles | default('false', true) }}"
+{% if api_auth_oidc.abac_use_roles|default('false', true)|bool %}
 rolesMapping = """
  {{ api_auth_oidc.abac_roles_mapping | replace("'",'') }}
 """
@@ -138,12 +138,12 @@ defaultPermanentLocationId = "{{ enduro_ingest_storage_default_permanent_locatio
 
 [ingest.storage.oidc]
 enabled = {{ enduro_ingest_storage_oidc_enabled | default('false', true) }}
-providerURL = "{{ enduro_ingest_storage_oidc_provider_url }}"
-tokenURL = "{{ enduro_ingest_storage_oidc_token_url }}"
-clientID = "{{ enduro_ingest_storage_oidc_client_id }}"
-clientSecret = "{{ enduro_ingest_storage_oidc_client_secret }}"
-scopes = "{{ enduro_ingest_storage_oidc_scopes }}"
-audience = "{{ enduro_ingest_storage_oidc_audience }}"
+providerURL = "{{ enduro_ingest_storage_oidc_provider_url | default('') }}"
+tokenURL = "{{ enduro_ingest_storage_oidc_token_url | default('') }}"
+clientID = "{{ enduro_ingest_storage_oidc_client_id | default('') }}"
+clientSecret = "{{ enduro_ingest_storage_oidc_client_secret | default('') }}"
+scopes = "{{ enduro_ingest_storage_oidc_scopes | default('') }}"
+audience = "{{ enduro_ingest_storage_oidc_audience | default('') }}"
 tokenExpiryLeeway = "{{ enduro_ingest_storage_oidc_token_expiry_leeway | default('30s', true) }}"
 retryMaxAttempts = {{ enduro_ingest_storage_oidc_retry_max_attempts | default(3, true) }}
 retryInitialInterval = "{{ enduro_ingest_storage_oidc_retry_initial_interval| default('500ms', true)  }}"
