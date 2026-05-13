@@ -2,57 +2,43 @@
 {% set pipeline = enduro_pipelines[0] %}
 
 debug = false
-verbosity = 2
-sharedPath = "/var/lib/enduro/preprocessing"
-checkDuplicates = "{{ preprocessing_check_duplicates }}"
-
-[persistence]
-dsn = "{{ preprocessing_db_user }}:{{ preprocessing_db_pass }}@tcp({{ preprocessing_db_host }}:{{ preprocessing_db_port | int }})/{{ preprocessing_db_name }}"
-driver = "mysql"
-migrate = true
+verbosity = 0
 
 [temporal]
 address = "127.0.0.1:7233"
 namespace = "default"
-taskQueue = "preprocessing"
-workflowName = "preprocessing"
 
 [worker]
 maxConcurrentSessions = 1
+taskQueue = "sfa-enduro"
 
-[bagit]
+[preprocessing]
+workflowName = "preprocessing"
+sharedPath = "/var/lib/enduro/preprocessing"
+checkDuplicates = "{{ preprocessing_check_duplicates }}"
+
+[preprocessing.persistence]
+dsn = "{{ preprocessing_db_user }}:{{ preprocessing_db_pass }}@tcp({{ preprocessing_db_host }}:{{ preprocessing_db_port | int }})/{{ preprocessing_db_name }}"
+driver = "mysql"
+migrate = true
+
+[preprocessing.bagCreate]
 checksumAlgorithm = "md5"
 
-[fileformat]
+[preprocessing.fileFormat]
 allowlistPath = "/etc/allowed_file_formats.csv"
 
-[filevalidate.verapdf]
+[preprocessing.filevalidate.verapdf]
 path = "{{ preprocessing_verapdf_path }}"
 
-[ais]
+[poststorage]
+workflowName = "poststorage"
 workingDir = "/tmp"
 
-[ais.temporal]
-address = "127.0.0.1:7233"
-namespace = "default"
-taskQueue = "ais"
-workflowName = "ais"
-
-[ais.worker]
-maxConcurrentSessions = 1
-
-[ais.amss]
+[poststorage.amss]
 url = "{{ pipeline.storageServiceURL }}"
 user = "{{ pipeline.storageServiceUser }}"
 key = "{{ pipeline.storageServiceKey }}"
-
-[ais.bucket]
-endpoint = "{{ pipeline.watched_endpoint }}"
-pathStyle = true
-accessKey = "{{ pipeline.watched_key }}"
-secretKey = "{{ pipeline.watched_secret }}"
-region = "{{ pipeline.watched_region }}"
-bucket = "ais"
 
 [apis]
 enabled = "{{ sfa_apis_enabled | default('false', true) }}"
