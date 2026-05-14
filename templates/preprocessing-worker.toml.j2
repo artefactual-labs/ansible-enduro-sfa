@@ -36,9 +36,9 @@ workflowName = "poststorage"
 workingDir = "/tmp"
 
 [poststorage.amss]
-url = "{{ pipeline.storageServiceURL }}"
-user = "{{ pipeline.storageServiceUser }}"
-key = "{{ pipeline.storageServiceKey }}"
+baseURL = "{{ pipeline.storageServiceURL }}"
+username = "{{ pipeline.storageServiceUser }}"
+key = "{{ pipeline.storageServiceKey }}"
 
 [apis]
 enabled = "{{ sfa_apis_enabled | default('false', true) }}"
