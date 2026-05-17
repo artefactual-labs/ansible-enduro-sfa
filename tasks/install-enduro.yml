@@ -14,14 +14,15 @@
     shell: /usr/sbin/nologin
     system: true
     createhome: true
+    generate_ssh_key: true  
     home: /var/lib/enduro
   when: enduro_create_system_user|bool
 
 - name: Download enduro binary to local folder
   become: false
   get_url:
-    url: "https://github.com/artefactual-labs/enduro/releases/download/v{{ enduro_version }}/enduro_{{ enduro_version }}_Linux-64bit.tar.gz"
-    dest: "/tmp/enduro_{{ enduro_version }}_Linux-64bit.tar.gz"
+    url: "https://github.com/artefactual-sdps/enduro/releases/download/v{{ enduro_version }}/enduro-sdps_{{ enduro_version }}_Linux-64bit.tar.gz"
+    dest: "/tmp/enduro-sdps_{{ enduro_version }}_Linux-64bit.tar.gz"
     checksum: "sha256:{{ enduro_checksum }}"
     mode: '0644'
   register: _download_binary
@@ -34,19 +35,44 @@
 - name: Unpack enduro binary
   become: false
   unarchive:
-    src: "/tmp/enduro_{{ enduro_version }}_Linux-64bit.tar.gz"
+    src: "/tmp/enduro-sdps_{{ enduro_version }}_Linux-64bit.tar.gz"
     dest: "/tmp"
-    creates: "/tmp/enduro_{{ enduro_version }}_Linux-64bit/enduro"
+    creates: "/tmp/enduro-sdps_{{ enduro_version }}_Linux-64bit/enduro"
   delegate_to: localhost
   check_mode: false
 
-- name: Propagate enduro binaries
+- name: Propagate enduro binary
   copy:
-    src: "/tmp/enduro_{{ enduro_version }}_Linux-64bit/enduro"
+    src: "/tmp/enduro-sdps_{{ enduro_version }}_Linux-64bit/enduro"
     dest: "{{ enduro_binary_install_dir }}/enduro"
     mode: 0755
     owner: root
     group: root
   notify: restart enduro
   when: not ansible_check_mode
+- name: Propagate enduro-am-worker binary
+  copy:
+    src: "/tmp/enduro-sdps_{{ enduro_version }}_Linux-64bit/enduro-am-worker"
+    dest: "{{ enduro_binary_install_dir }}/enduro-am-worker"
+    mode: 0755
+    owner: root
+    group: root
+  notify: restart enduro
+  when: not ansible_check_mode
+- name: Propagate enduro-am-worker binary
+  copy:
+    src: "/tmp/enduro-sdps_{{ enduro_version }}_Linux-64bit/dashboard/dist/"
+    dest: "/usr/lib/enduro-dashboard"
+    mode: 0755
+    owner: root
+    group: root
+  notify: restart enduro
+  when: not ansible_check_mode
 
+- name: "Create enduro-am-worker config file"
+  template:
+     src: "etc/sysconfig/enduro-am-worker.j2"
+     dest: "{{ systemd_environment_path }}/enduro-am-worker"
+     mode: 0640
+     owner: "{{ enduro_system_user }}"
+     group: "{{ enduro_system_group }}"
