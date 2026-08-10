@@ -1,5 +1,6 @@
 ---
 enduro_version: "0.41.1"
+systemd_environment_path: "{% if ansible_os_family == 'RedHat' %}/etc/sysconfig{% else %}/etc/default{% endif %}"
 enduro_listen_debug_address: "127.0.0.1:9001"
 enduro_listen_api_address: "127.0.0.1:9000"
 enduro_binary_install_dir: "/usr/local/bin"
