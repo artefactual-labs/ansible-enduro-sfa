@@ -1,20 +1,27 @@
-verbosity = "{{ enduro_debug_verbosity }}"
-debug = "{{  enduro_debug_enabled }}"
-debugListen = "{{ enduro_listen_debug_address }}"
-{% if enduro_pipelines|length > 0 %}
-useArchivematica = "true"
-{% endif %}
+verbosity = "{{ enduro_verbosity }}"
+logFormat = "{{ enduro_log_format }}"
+debugListen = "{{ enduro_debug_listen }}"
 
 [temporal]
 namespace = "{{ enduro_temporal_namespace }}"
-address = "{{ enduro_listen_temporal_address }}"
-{% if enduro_pipelines|length > 0 %}
-taskQueue = "global"
-{% endif %}
+address = "{{ enduro_temporal_address }}"
+taskQueue = "{{ enduro_temporal_task_queue }}"
+
+[internalapi]
+listen = "{{ enduro_internalapi_listen }}"
+
+[internalapi.log]
+path = "{{ enduro_internalapi_log_path }}"
+level = "{{ enduro_internalapi_log_level }}"
+format = "{{ enduro_internalapi_log_format }}"
 
 [api]
-listen = "{{ enduro_listen_api_address }}"
-debug = "{{ enduro_api_debug_enabled }}"
+listen = "{{ enduro_api_listen }}"
+
+[api.log]
+path = "{{ enduro_api_log_path }}"
+level = "{{ enduro_api_log_level }}"
+format = "{{ enduro_api_log_format }}"
 
 [api.auth]
 enabled = "{{ enduro_api_auth_enabled }}"
@@ -49,10 +56,6 @@ prefix = "enduro-ticket"
 [event]
 redisAddress = "redis://127.0.0.1:6379"
 redisChannel = "enduro-ingest-events"
-
-[internalapi]
-listen = "{{ enduro_internal_api_listen }}"
-debug = "{{enduro_internal_api_debug }}"
 
 [internalStorage]
 url = "{{ enduro_internal_storage_url }}"
