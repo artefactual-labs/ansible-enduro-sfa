@@ -58,7 +58,7 @@
         service: "preprocessing-worker"
         conf_files_name: "preprocessing-worker"
         logfile: "/var/log/enduro/preprocessing-worker.log"
-        order: "50"
+        rsyslog_conf_file_name_num_prefix: "50"
   when: enduro_use_syslog|bool
 
   

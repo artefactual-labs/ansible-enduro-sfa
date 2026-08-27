@@ -18,5 +18,5 @@
         service: "enduro-am-worker"
         conf_files_name: "enduro-am-worker"
         logfile: "/var/log/enduro/enduro-am-worker.log"
-        order: "50"
+        rsyslog_conf_file_name_num_prefix: "50"
   when: enduro_use_syslog|bool
