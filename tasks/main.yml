@@ -123,3 +123,6 @@
       location_uuid: "{{ enduro_ingest_storage_default_permanent_location_id }}"
   when:
     - "enduro_storage_config is defined"
+  tags:
+    - enduro_storage_mysql_insert_query
+
