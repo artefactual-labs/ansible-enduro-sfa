@@ -1,6 +1,6 @@
 [Unit]
 Description=Enduro AM worker
-AssertFileIsExecutable=/usr/bin/enduro-am-worker
+AssertFileIsExecutable={{ enduro_binary_install_dir }}/enduro-am-worker
 After={{ enduro_systemd_after_services }}
 
 
@@ -11,9 +11,9 @@ User={{ enduro_system_user }}
 Group={{ enduro_system_group }}
 EnvironmentFile=-{{ systemd_environment_path }}/enduro-am-worker
 {% if enduro_systemd_credentials|bool %}
-ExecStart=/usr/bin/enduro-am-worker --config $SECRETS
+ExecStart={{ enduro_binary_install_dir }}/enduro-am-worker --config $SECRETS
 {% else %}
-ExecStart=/usr/bin/enduro-am-worker --config /etc/enduro.toml
+ExecStart={{ enduro_binary_install_dir }}/enduro-am-worker --config /etc/enduro.toml
 {% endif %}
 {% if enduro_use_syslog|bool %}
 SyslogIdentifier=enduro-am-worker
